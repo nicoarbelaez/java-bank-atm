@@ -1,24 +1,36 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        // Variables básicas
-        String accountNumber = "123456789";
-        double balance = 1500.75;
-        int pin = 1234;
+        double balance = 1000.0;
+        ArrayList<String> transactionHistory = new ArrayList<>();
 
-        // Array de montos de transacciones
-        int[] transactionAmounts = {200, -100, 50};
+        balance = deposit(500, balance, transactionHistory);
+        balance = withdraw(100, balance, transactionHistory);
 
-        // Operaciones con variables
-        balance += transactionAmounts[0]; // Depósito
-        if (balance > 0 && pin == 1234) {
-            System.out.println("Acceso Concedido");
+        System.out.println("Balance final: " + balance);
+        for (String transaction : transactionHistory) {
+            System.out.println(transaction);
         }
 
-        // Uso de operadores
-        balance++; // Incremento
-        String status = (balance < 0) ? "Deuda" : "Crédito";
-        System.out.println("Estado de cuenta: " + status);
+        System.out.println("Balance final: " + balance);
+    }
+
+    public static double deposit(double amount, double balance, ArrayList<String> transactionHistory) {
+        balance += amount;
+        transactionHistory.add("Deposited: $" + amount);
+        return balance;
+    }
+
+    public static double withdraw(double amount, double balance, ArrayList<String> transactionHistory) {
+        if (balance >= amount) {
+            balance -= amount;
+            transactionHistory.add("Withdrew: $" + amount);
+        } else {
+            System.out.println("Insufficient funds");
+        }
+        return balance;
     }
 }
