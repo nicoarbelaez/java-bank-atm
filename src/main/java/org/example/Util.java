@@ -96,4 +96,13 @@ public class Util {
         }
         return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
+
+    public static boolean isNumeric(String integer) {
+        try {
+            Integer.parseInt(integer);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
