@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.example.account.Account;
+import org.example.enums.AccountType;
 
 public class Util {
 
@@ -70,5 +71,16 @@ public class Util {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Generates a random account type.
+     * 
+     * @return A random account type.
+     */
+    public static AccountType getRandomAccountType() {
+        AccountType[] accountTypes = AccountType.values();
+        int randomIndex = ThreadLocalRandom.current().nextInt(accountTypes.length);
+        return accountTypes[randomIndex];
     }
 }

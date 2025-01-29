@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import org.example.enums.AccountType;
 import org.example.enums.TypeTransaction;
 import org.example.exception.InsufficientFundsException;
+import org.example.transaction.Transaction;
+import org.example.transaction.TransactionHandler;
 
-public abstract class Account implements AccountAuthentication{
+public abstract class Account implements AccountAuthentication, TransactionHandler {
     private String accountNumber;
     private double balance;
     private AccountType accountType;
@@ -21,11 +23,13 @@ public abstract class Account implements AccountAuthentication{
         this.dateCreated = new Date(System.currentTimeMillis());
     }
 
+    @Override
     public void deposit(double amount) {
         balance += amount;
         transactions.add(new Transaction(amount, TypeTransaction.DEPOSIT));
     }
 
+    @Override
     public void withdraw(double amount) throws InsufficientFundsException {
         if (balance < amount) {
             throw new InsufficientFundsException("Insufficient funds to withdraw " + amount);
@@ -36,6 +40,10 @@ public abstract class Account implements AccountAuthentication{
 
     public String getAccountNumber() {
         return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public double getBalance() {

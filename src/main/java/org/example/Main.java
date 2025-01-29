@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.example.account.Account;
+import org.example.account.CheckingAccount;
+import org.example.account.InvestimentAccount;
 import org.example.account.SavingsAccount;
 
 public class Main {
@@ -15,12 +17,34 @@ public class Main {
         showWelcomeMessage();
 
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter \"exit\" to close the application.");
+
+        String accountNumber = "";
+        Account account = null;
+        do {
+            if (accountNumber != "") {
+                System.out.println("Account not found. Please try again.");
+            }
+            System.out.println("Enter your account number:");
+
+            accountNumber = scanner.nextLine();
+
+            if (accountNumber.equals("exit")) {
+                break;
+            }
+
+            account = Util.findAccount(accounts, accountNumber);
+        } while (account == null);
+
         scanner.close();
     }
 
     public static void randomData() {
         double initialBalanceFirstAccount = Util.generateRandomDouble(500, 10000);
         accounts.add(new SavingsAccount("Juan P", "123", initialBalanceFirstAccount));
+        accounts.get(0).setAccountNumber("A123");
+        ;
         accounts.get(0).deposit(500);
 
         int amountAccount = Util.generateRandomInt(10, 50);
@@ -28,8 +52,18 @@ public class Main {
             double balance = Util.generateRandomDouble(10, 100);
             String name = "Account " + (i + 1);
             String password = "123" + (char) Util.generateRandomInt(65, 122);
-            
-            accounts.add(new SavingsAccount(name, password, balance));
+
+            switch (Util.getRandomAccountType()) {
+                case SAVINGS:
+                    accounts.add(new SavingsAccount(name, password, balance));
+                    break;
+                case CHECKING:
+                    accounts.add(new CheckingAccount(balance));
+                    break;
+                case INVESTMENT:
+                    accounts.add(new InvestimentAccount(balance));
+                    break;
+            }
         }
     }
 
@@ -45,6 +79,7 @@ public class Main {
      * Imprime el logo del banco con arte ASCII.
      */
     private static void printBankLogo() {
+        Util.clearConsole();
         System.out.println("         _                  ____              _    ");
         System.out.println("        | | __ ___   ____ _| __ )  __ _ _ __ | | __");
         System.out.println("     _  | |/ _` \\ \\ / / _` |  _ \\ / _` | '_ \\| |/ /");
