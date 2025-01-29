@@ -7,7 +7,7 @@ import org.example.enums.AccountType;
 import org.example.enums.TypeTransaction;
 import org.example.exception.InsufficientFundsException;
 
-public abstract class Account {
+public abstract class Account implements AccountAuthentication{
     private String accountNumber;
     private double balance;
     private AccountType accountType;
