@@ -5,6 +5,7 @@
 # Java Bank ATM
 
 ## Overview: Problema a resolver
+> [!TIP]
 > Soy el propietario de *Java Bank ATM* y necesito implementar un sistema que me permita gestionar de manera integral y sencilla las operaciones básicas de mi banco a través de una consola. Requiero que el sistema incluya los siguientes servicios:
 > 
 > - **Crear cuentas:** Permitir la apertura de nuevas cuentas para los clientes.
@@ -17,11 +18,9 @@
 > 
 > La solución debe ser operable exclusivamente a través de la consola, garantizando que todas las operaciones sean intuitivas y directas, sin necesidad de interfaces gráficas complejas. Con esta herramienta, espero poder gestionar de forma efectiva todas las transacciones y operaciones esenciales de mi banco.
 
-### Alcance (Scope)
+## Alcance (Scope)
 
-#### Actores
-- **Cliente**
-
+### Cliente
 #### Casos de Uso Principales
 
 1. **Crear Cuenta**
@@ -50,7 +49,7 @@
      - Consultar movimientos y transacciones.
      - Consultar detalles de la información personal y de cada cuenta.
 
-#### Fuera del Alcance (Out of Scope)
+### Fuera del Alcance (Out of Scope)
 
 - **Restricciones en la Creación de Cuentas:**
   - No se permitirá la creación de una cuenta de inversión sin que el cliente tenga previamente una cuenta de ahorro o corriente.
